@@ -6,12 +6,10 @@
     <meta name="description" content="Immo's Bro, votre agence immobilière de confiance à Vétroz (Valais). Estimation gratuite en 48h. Achat, vente, location et rénovation de villas, appartements et chalets à Sion, Conthey, Ardon, Chamoson, Sierre et Crans-Montana.">
     <meta name="keywords" content="agence immobilière Valais, Vétroz, Sion, achat vente location Valais, rénovation, expertise">
     <title>Immo's Bro — Agence immobilière à Vétroz | Achat, Vente, Estimation, Rénovation</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: #1e40af;
@@ -22,7 +20,6 @@
             color: #1e293b;
         }
         h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; font-weight: 600; }
-
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -37,8 +34,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
-        .logo { font-size: 1.85rem; font-weight: 800; color: var(--primary); }
+        .logo { font-size: 1.85rem; font-weight: 800; color: var(--primary); white-space: nowrap; }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
         .nav-links {
             display: flex;
             gap: 2.5rem;
@@ -48,13 +51,41 @@
             color: #1e293b;
             text-decoration: none;
         }
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .lang-btn {
+            width: 32px;
+            height: 24px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+            padding: 0;
+            background: none;
+        }
+        .lang-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .lang-btn:hover {
+            transform: scale(1.1);
+        }
+        .lang-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
         .burger {
             display: none;
             font-size: 1.9rem;
             cursor: pointer;
             color: var(--primary);
         }
-
         .hero {
             min-height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('https://www.azuremagazine.com/wp-content/uploads/2022/01/Azure-NAJ_Verbier-Chalet-Hero.jpg') center/cover no-repeat;
@@ -66,7 +97,6 @@
             padding: 0 5%;
         }
         .hero h1 { font-size: clamp(2.3rem, 7vw, 3.8rem); margin-bottom: 1rem; }
-
         .btn-primary {
             background: var(--primary);
             color: white;
@@ -75,10 +105,8 @@
             font-weight: 600;
             font-size: 1.1rem;
         }
-
         section { padding: 90px 5%; max-width: 1400px; margin: 0 auto; }
         .section-title { text-align: center; font-size: clamp(2rem, 6vw, 2.8rem); margin-bottom: 3rem; color: var(--primary); }
-
         .card-work {
             background: #f8fafc;
             border-radius: 18px;
@@ -87,8 +115,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         .card-img-top { height: 210px; object-fit: cover; }
-
-        /* Pastilles */
         .process-list {
             counter-reset: step;
             padding: 0;
@@ -117,17 +143,16 @@
             margin-right: 1.2rem;
             flex-shrink: 0;
         }
-
-        /* CONTACT CENTRÉ SUR MOBILE */
         #contact .contact-box {
             max-width: 420px;
             margin: 0 auto;
             text-align: center;
         }
-
-        /* MOBILE OPTIMISATION */
         @media (max-width: 900px) {
             .burger { display: block; }
+            .nav-right {
+                gap: 1rem;
+            }
             .nav-links {
                 position: absolute;
                 top: 100%;
@@ -144,28 +169,48 @@
             .nav-links a { padding: 1.2rem; text-align: center; border-bottom: 1px solid #eee; }
             section { padding: 70px 6%; }
             .btn-primary { width: 100%; max-width: 320px; }
+            .lang-switcher {
+                order: -1;
+            }
         }
         @media (max-width: 480px) {
             .hero { min-height: 85vh; }
             .card-img-top { height: 170px; }
             .process-item { font-size: 1.05rem; }
+            .lang-btn {
+                width: 28px;
+                height: 20px;
+            }
         }
     </style>
 </head>
 <body>
-
     <!-- Navbar -->
     <header>
         <nav>
             <div class="logo">Immo's Bro</div>
-            <div class="burger" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div class="nav-links" id="navLinks">
-                <a href="#why">Pourquoi</a>
-                <a href="#services">Services</a>
-                <a href="#process">Process</a>
-                <a href="#about">À propos</a>
+            <div class="nav-right">
+                <!-- Language Switcher -->
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-btn active" data-lang="fr" title="Français" aria-label="Français">
+                        <img src="https://flagcdn.com/w40/fr.png" alt="FR" width="32" height="24">
+                    </button>
+                    <button class="lang-btn" data-lang="en" title="English" aria-label="English">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="EN" width="32" height="24">
+                    </button>
+                    <button class="lang-btn" data-lang="de" title="Deutsch" aria-label="Deutsch">
+                        <img src="https://flagcdn.com/w40/de.png" alt="DE" width="32" height="24">
+                    </button>
+                </div>
+                <div class="burger" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#why" data-i18n="nav_why">Pourquoi</a>
+                    <a href="#services" data-i18n="nav_services">Services</a>
+                    <a href="#process" data-i18n="nav_process">Process</a>
+                    <a href="#about" data-i18n="nav_about">À propos</a>
+                </div>
             </div>
         </nav>
     </header>
@@ -173,44 +218,44 @@
     <!-- Hero -->
     <section class="hero">
         <div>
-            <h1>Parce que dans l’immobilier, tu mérites un grand frère à tes côtés.</h1>
-            <p>Achat, vente, rénovation, location — on t’accompagne de A à Z avec clarté et bienveillance.</p>
-            <a href="#contact" class="btn btn-primary btn-lg">Estimation gratuite</a>
+            <h1 data-i18n="hero_title">Parce que dans l’immobilier, tu mérites un grand frère à tes côtés.</h1>
+            <p data-i18n="hero_subtitle">Achat, vente, rénovation, location — on t’accompagne de A à Z avec clarté et bienveillance.</p>
+            <a href="#contact" class="btn btn-primary btn-lg" data-i18n="hero_cta">Estimation gratuite</a>
         </div>
     </section>
 
     <!-- Pourquoi -->
     <section id="why" class="bg-light">
-        <h2 class="section-title">Pourquoi Immo's Bro&nbsp;?</h2>
+        <h2 class="section-title" data-i18n="why_title">Pourquoi Immo's Bro&nbsp;?</h2>
         <div class="row g-5 text-center">
             <div class="col-md-4">
                 <i class="bi bi-people display-1 text-primary mb-3"></i>
-                <h3>Un accompagnement humain</h3>
-                <p>On prend le temps de t’écouter, de comprendre ton histoire, ton budget, tes rêves.</p>
+                <h3 data-i18n="why_1_title">Un accompagnement humain</h3>
+                <p data-i18n="why_1_text">On prend le temps de t’écouter, de comprendre ton histoire, ton budget, tes rêves.</p>
             </div>
             <div class="col-md-4">
                 <i class="bi bi-shield-check display-1 text-primary mb-3"></i>
-                <h3>Des conseils objectifs et transparents</h3>
-                <p>Pas de jargon. On t’explique tout simplement pour que tu décides en toute sérénité.</p>
+                <h3 data-i18n="why_2_title">Des conseils objectifs et transparents</h3>
+                <p data-i18n="why_2_text">Pas de jargon. On t’explique tout simplement pour que tu décides en toute sérénité.</p>
             </div>
             <div class="col-md-4">
                 <i class="bi bi-globe display-1 text-primary mb-3"></i>
-                <h3>Un réseau d’experts reconnus</h3>
-                <p>Architectes, notaires, banquiers : tous alignés sur tes intérêts.</p>
+                <h3 data-i18n="why_3_title">Un réseau d’experts reconnus</h3>
+                <p data-i18n="why_3_text">Architectes, notaires, banquiers : tous alignés sur tes intérêts.</p>
             </div>
         </div>
     </section>
 
     <!-- Services -->
     <section id="services">
-        <h2 class="section-title">Nos services</h2>
+        <h2 class="section-title" data-i18n="services_title">Nos services</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
                 <div class="card-work h-100">
                     <img src="https://cdn.homedit.com/wp-content/uploads/2020/03/Villa-Courbe-Swiss-SAOTA-dream-home.jpg" class="card-img-top" alt="Achat" loading="lazy">
                     <div class="card-body">
-                        <h4>Achat</h4>
-                        <p>Du rêve à la signature : on trouve, on négocie, on accompagne, on finalise.</p>
+                        <h4 data-i18n="service_1_title">Achat</h4>
+                        <p data-i18n="service_1_text">Du rêve à la signature : on trouve, on négocie, on accompagne, on finalise.</p>
                     </div>
                 </div>
             </div>
@@ -218,8 +263,8 @@
                 <div class="card-work h-100">
                     <img src="https://boulevard.co/wp-content/uploads/2025/04/349c-rte-laussanne-genthod-geneva-switzerland-1.png" class="card-img-top" alt="Vente" loading="lazy">
                     <div class="card-body">
-                        <h4>Vente</h4>
-                        <p>Estimation juste, mise en valeur, diffusion optimale, closing serein.</p>
+                        <h4 data-i18n="service_2_title">Vente</h4>
+                        <p data-i18n="service_2_text">Estimation juste, mise en valeur, diffusion optimale, closing serein.</p>
                     </div>
                 </div>
             </div>
@@ -227,8 +272,8 @@
                 <div class="card-work h-100">
                     <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9" class="card-img-top" alt="Estimation" loading="lazy">
                     <div class="card-body">
-                        <h4>Estimation</h4>
-                        <p>Rapport détaillé en 48h basé sur données réelles et expertise locale.</p>
+                        <h4 data-i18n="service_3_title">Estimation</h4>
+                        <p data-i18n="service_3_text">Rapport détaillé en 48h basé sur données réelles et expertise locale.</p>
                     </div>
                 </div>
             </div>
@@ -236,8 +281,8 @@
                 <div class="card-work h-100">
                     <img src="https://img.jamesedition.com/listing_images/2025/11/04/09/05/31/2a2b8b6a-0f46-4ac2-9fcc-f835f3a28e98/je/507x312xc.jpg" class="card-img-top" alt="Rénovation" loading="lazy">
                     <div class="card-body">
-                        <h4>Travaux & rénovation</h4>
-                        <p>Besoin de chiffrer ou valider un projet ? Devis et comparatif de prestataires.</p>
+                        <h4 data-i18n="service_4_title">Travaux & rénovation</h4>
+                        <p data-i18n="service_4_text">Besoin de chiffrer ou valider un projet ? Devis et comparatif de prestataires.</p>
                     </div>
                 </div>
             </div>
@@ -245,8 +290,8 @@
                 <div class="card-work h-100">
                     <img src="https://img.jamesedition.com/listing_images/2025/09/04/08/00/42/c5dc1596-2c36-4f66-869b-71b7e3ad0e41/je/760x470xc.jpg" class="card-img-top" alt="Financement" loading="lazy">
                     <div class="card-body">
-                        <h4>Financement & fiscalité</h4>
-                        <p>Simulation hypothécaire personnalisée et conseils fiscaux.</p>
+                        <h4 data-i18n="service_5_title">Financement & fiscalité</h4>
+                        <p data-i18n="service_5_text">Simulation hypothécaire personnalisée et conseils fiscaux.</p>
                     </div>
                 </div>
             </div>
@@ -254,8 +299,8 @@
                 <div class="card-work h-100">
                     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" class="card-img-top" alt="Gestion locative" loading="lazy">
                     <div class="card-body">
-                        <h4>Gestion locative</h4>
-                        <p>Sélection locataires, baux, entretien et suivi.</p>
+                        <h4 data-i18n="service_6_title">Gestion locative</h4>
+                        <p data-i18n="service_6_text">Sélection locataires, baux, entretien et suivi.</p>
                     </div>
                 </div>
             </div>
@@ -264,13 +309,13 @@
 
     <!-- Process -->
     <section id="process" class="bg-light">
-        <h2 class="section-title">Comment ça marche ? Simplement.</h2>
+        <h2 class="section-title" data-i18n="process_title">Comment ça marche ? Simplement.</h2>
         <ol class="process-list">
-            <li class="process-item">On t’écoute — On comprend ton projet et tes priorités.</li>
-            <li class="process-item">On analyse — Diagnostic, budget, plan d’action.</li>
-            <li class="process-item">On cherche — Biens publics et off-market.</li>
-            <li class="process-item">On visite — Avec un expert, sur place.</li>
-            <li class="process-item">On finalise — Négociation, notaire, clés.</li>
+            <li class="process-item" data-i18n="process_1">On t’écoute — On comprend ton projet et tes priorités.</li>
+            <li class="process-item" data-i18n="process_2">On analyse — Diagnostic, budget, plan d’action.</li>
+            <li class="process-item" data-i18n="process_3">On cherche — Biens publics et off-market.</li>
+            <li class="process-item" data-i18n="process_4">On visite — Avec un expert, sur place.</li>
+            <li class="process-item" data-i18n="process_5">On finalise — Négociation, notaire, clés.</li>
         </ol>
     </section>
 
@@ -281,43 +326,221 @@
                 <img src="https://tfxstorageimg.s3.amazonaws.com/mcezdheseg69m5ybm44ha6worc4l" class="img-fluid rounded-4" alt="Immo's Bro" loading="lazy" style="max-width: 85%;">
             </div>
             <div class="col-lg-6">
-                <h2 class="display-5 mb-4">À propos d'Immo's Bro</h2>
-                <p class="lead">Immo's Bro est ton allié de confiance en immobilier suisse.</p>
-                 <p class="lead">Nous t’écoutons, te conseillons et te protégeons à chaque étape de ton projet.</p>
-                <p class="lead">Notre mission est de rendre l'immobilier simple, transparent et humain.</p>
-<p> </p> 
-<p> </p>       
+                <h2 class="display-5 mb-4" data-i18n="about_title">À propos d'Immo's Bro</h2>
+                <p class="lead" data-i18n="about_1">Immo's Bro est ton allié de confiance en immobilier suisse.</p>
+                <p class="lead" data-i18n="about_2">Nous t’écoutons, te conseillons et te protégeons à chaque étape de ton projet.</p>
+                <p class="lead" data-i18n="about_3">Notre mission est de rendre l'immobilier simple, transparent et humain.</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact (centré sur mobile) -->
+    <!-- Contact -->
     <section id="contact" class="bg-light">
-        <h2 class="section-title">Contacte-nous sans tarder</h2>
+        <h2 class="section-title" data-i18n="contact_title">Contacte-nous sans tarder</h2>
         <div class="contact-box">
             <p class="fs-4 mb-2"><a href="mailto:contact@immosbro.com">contact@immosbro.com</a></p>
             <p class="fs-4"><a href="tel:+41796265763">+41 79 626 57 63</a></p>
-            <p class="text-success fw-bold mt-4">Réponse garantie sous 48h</p>
+            <p class="text-success fw-bold mt-4" data-i18n="contact_response">Réponse garantie sous 48h</p>
         </div>
     </section>
 
     <!-- CTA Final -->
     <section style="background: linear-gradient(135deg, var(--primary), #1e3a8a); color: white; text-align: center; padding: 80px 5%;">
-        <h2 class="display-5 mb-4">Prêt à avancer avec nous ?</h2>
-        <p class="lead mb-5">Un projet ? Une question ? On est là.</p>
-        <a href="#contact" class="btn btn-light btn-lg">Prendre un RDV gratuit</a>
+        <h2 class="display-5 mb-4" data-i18n="cta_title">Prêt à avancer avec nous ?</h2>
+        <p class="lead mb-5" data-i18n="cta_text">Un projet ? Une question ? On est là.</p>
+        <a href="#contact" class="btn btn-light btn-lg" data-i18n="cta_btn">Prendre un RDV gratuit</a>
     </section>
 
     <!-- Footer -->
     <footer class="py-5 text-center bg-light">
-        <p>© 2026 Immo's Bro by Swiss Administration & Accounting SARL – Tous droits réservés.</p>
+        <p data-i18n="footer_copy">© 2026 Immo's Bro by Swiss Administration & Accounting SARL – Tous droits réservés.</p>
         <p>
-            <a href="#" onclick="openModal('mentionsLegalesModal')">Mentions légales</a> | 
-            <a href="#" onclick="openModal('politiqueConfidentialiteModal')">Politique de confidentialité</a>
+            <a href="#" onclick="openModal('mentionsLegalesModal')" data-i18n="footer_legal">Mentions légales</a> |
+            <a href="#" onclick="openModal('politiqueConfidentialiteModal')" data-i18n="footer_privacy">Politique de confidentialité</a>
         </p>
     </footer>
 
     <script>
+        // ========== TRANSLATIONS ==========
+        const translations = {
+            fr: {
+                nav_why: "Pourquoi",
+                nav_services: "Services",
+                nav_process: "Process",
+                nav_about: "À propos",
+                hero_title: "Parce que dans l’immobilier, tu mérites un grand frère à tes côtés.",
+                hero_subtitle: "Achat, vente, rénovation, location — on t’accompagne de A à Z avec clarté et bienveillance.",
+                hero_cta: "Estimation gratuite",
+                why_title: "Pourquoi Immo's Bro ?",
+                why_1_title: "Un accompagnement humain",
+                why_1_text: "On prend le temps de t’écouter, de comprendre ton histoire, ton budget, tes rêves.",
+                why_2_title: "Des conseils objectifs et transparents",
+                why_2_text: "Pas de jargon. On t’explique tout simplement pour que tu décides en toute sérénité.",
+                why_3_title: "Un réseau d’experts reconnus",
+                why_3_text: "Architectes, notaires, banquiers : tous alignés sur tes intérêts.",
+                services_title: "Nos services",
+                service_1_title: "Achat",
+                service_1_text: "Du rêve à la signature : on trouve, on négocie, on accompagne, on finalise.",
+                service_2_title: "Vente",
+                service_2_text: "Estimation juste, mise en valeur, diffusion optimale, closing serein.",
+                service_3_title: "Estimation",
+                service_3_text: "Rapport détaillé en 48h basé sur données réelles et expertise locale.",
+                service_4_title: "Travaux & rénovation",
+                service_4_text: "Besoin de chiffrer ou valider un projet ? Devis et comparatif de prestataires.",
+                service_5_title: "Financement & fiscalité",
+                service_5_text: "Simulation hypothécaire personnalisée et conseils fiscaux.",
+                service_6_title: "Gestion locative",
+                service_6_text: "Sélection locataires, baux, entretien et suivi.",
+                process_title: "Comment ça marche ? Simplement.",
+                process_1: "On t’écoute — On comprend ton projet et tes priorités.",
+                process_2: "On analyse — Diagnostic, budget, plan d’action.",
+                process_3: "On cherche — Biens publics et off-market.",
+                process_4: "On visite — Avec un expert, sur place.",
+                process_5: "On finalise — Négociation, notaire, clés.",
+                about_title: "À propos d'Immo's Bro",
+                about_1: "Immo's Bro est ton allié de confiance en immobilier suisse.",
+                about_2: "Nous t’écoutons, te conseillons et te protégeons à chaque étape de ton projet.",
+                about_3: "Notre mission est de rendre l'immobilier simple, transparent et humain.",
+                contact_title: "Contacte-nous sans tarder",
+                contact_response: "Réponse garantie sous 48h",
+                cta_title: "Prêt à avancer avec nous ?",
+                cta_text: "Un projet ? Une question ? On est là.",
+                cta_btn: "Prendre un RDV gratuit",
+                footer_copy: "© 2026 Immo's Bro by Swiss Administration & Accounting SARL – Tous droits réservés.",
+                footer_legal: "Mentions légales",
+                footer_privacy: "Politique de confidentialité"
+            },
+            en: {
+                nav_why: "Why us",
+                nav_services: "Services",
+                nav_process: "Process",
+                nav_about: "About",
+                hero_title: "Because in real estate, you deserve a big brother by your side.",
+                hero_subtitle: "Buying, selling, renovation, rental — we support you from A to Z with clarity and care.",
+                hero_cta: "Free valuation",
+                why_title: "Why Immo's Bro?",
+                why_1_title: "Human support",
+                why_1_text: "We take the time to listen, understand your story, your budget and your dreams.",
+                why_2_title: "Objective & transparent advice",
+                why_2_text: "No jargon. We explain everything simply so you can decide with complete peace of mind.",
+                why_3_title: "A network of recognised experts",
+                why_3_text: "Architects, notaries, bankers: all aligned with your interests.",
+                services_title: "Our services",
+                service_1_title: "Buying",
+                service_1_text: "From dream to signature: we find, negotiate, support and finalise.",
+                service_2_title: "Selling",
+                service_2_text: "Fair valuation, property staging, optimal exposure, smooth closing.",
+                service_3_title: "Valuation",
+                service_3_text: "Detailed report within 48h based on real data and local expertise.",
+                service_4_title: "Works & renovation",
+                service_4_text: "Need to cost or validate a project? Quotes and comparison of providers.",
+                service_5_title: "Financing & tax",
+                service_5_text: "Personalised mortgage simulation and tax advice.",
+                service_6_title: "Property management",
+                service_6_text: "Tenant selection, leases, maintenance and follow-up.",
+                process_title: "How does it work? Simply.",
+                process_1: "We listen — We understand your project and priorities.",
+                process_2: "We analyse — Diagnosis, budget, action plan.",
+                process_3: "We search — Public listings and off-market properties.",
+                process_4: "We visit — With an expert, on site.",
+                process_5: "We finalise — Negotiation, notary, keys.",
+                about_title: "About Immo's Bro",
+                about_1: "Immo's Bro is your trusted partner in Swiss real estate.",
+                about_2: "We listen to you, advise you and protect you at every stage of your project.",
+                about_3: "Our mission is to make real estate simple, transparent and human.",
+                contact_title: "Contact us without delay",
+                contact_response: "Reply guaranteed within 48h",
+                cta_title: "Ready to move forward with us?",
+                cta_text: "A project? A question? We're here.",
+                cta_btn: "Book a free appointment",
+                footer_copy: "© 2026 Immo's Bro by Swiss Administration & Accounting SARL – All rights reserved.",
+                footer_legal: "Legal notice",
+                footer_privacy: "Privacy policy"
+            },
+            de: {
+                nav_why: "Warum wir",
+                nav_services: "Dienstleistungen",
+                nav_process: "Ablauf",
+                nav_about: "Über uns",
+                hero_title: "Weil du im Immobilienbereich einen grossen Bruder an deiner Seite verdienst.",
+                hero_subtitle: "Kauf, Verkauf, Renovation, Vermietung — wir begleiten dich von A bis Z mit Klarheit und Wohlwollen.",
+                hero_cta: "Kostenlose Schätzung",
+                why_title: "Warum Immo's Bro?",
+                why_1_title: "Menschliche Begleitung",
+                why_1_text: "Wir nehmen uns Zeit, dich anzuhören und deine Geschichte, dein Budget und deine Träume zu verstehen.",
+                why_2_title: "Objektive & transparente Beratung",
+                why_2_text: "Kein Fachchinesisch. Wir erklären alles einfach, damit du in aller Ruhe entscheiden kannst.",
+                why_3_title: "Ein Netzwerk anerkannter Experten",
+                why_3_text: "Architekten, Notare, Banker: alle an deinen Interessen ausgerichtet.",
+                services_title: "Unsere Dienstleistungen",
+                service_1_title: "Kauf",
+                service_1_text: "Vom Traum bis zur Unterschrift: wir finden, verhandeln, begleiten und finalisieren.",
+                service_2_title: "Verkauf",
+                service_2_text: "Faire Schätzung, Aufwertung, optimale Vermarktung, ruhiger Abschluss.",
+                service_3_title: "Schätzung",
+                service_3_text: "Detaillierter Bericht innert 48h basierend auf realen Daten und lokaler Expertise.",
+                service_4_title: "Arbeiten & Renovation",
+                service_4_text: "Projekt kalkulieren oder validieren? Offerten und Vergleich von Anbietern.",
+                service_5_title: "Finanzierung & Steuern",
+                service_5_text: "Persönliche Hypothekensimulation und Steuerberatung.",
+                service_6_title: "Vermietungsmanagement",
+                service_6_text: "Mieterauswahl, Mietverträge, Unterhalt und Betreuung.",
+                process_title: "Wie funktioniert’s? Einfach.",
+                process_1: "Wir hören zu — Wir verstehen dein Projekt und deine Prioritäten.",
+                process_2: "Wir analysieren — Diagnose, Budget, Aktionsplan.",
+                process_3: "Wir suchen — Öffentliche und Off-Market-Objekte.",
+                process_4: "Wir besichtigen — Mit einem Experten vor Ort.",
+                process_5: "Wir finalisieren — Verhandlung, Notar, Schlüssel.",
+                about_title: "Über Immo's Bro",
+                about_1: "Immo's Bro ist dein vertrauenswürdiger Partner in der Schweizer Immobilienwelt.",
+                about_2: "Wir hören dir zu, beraten dich und schützen dich in jeder Phase deines Projekts.",
+                about_3: "Unsere Mission: Immobilien einfach, transparent und menschlich zu machen.",
+                contact_title: "Kontaktiere uns ohne Verzögerung",
+                contact_response: "Antwort innerhalb von 48h garantiert",
+                cta_title: "Bereit, mit uns voranzukommen?",
+                cta_text: "Ein Projekt? Eine Frage? Wir sind da.",
+                cta_btn: "Kostenlosen Termin vereinbaren",
+                footer_copy: "© 2026 Immo's Bro by Swiss Administration & Accounting SARL – Alle Rechte vorbehalten.",
+                footer_legal: "Impressum",
+                footer_privacy: "Datenschutz"
+            }
+        };
+
+        // ========== LANGUAGE SWITCHER ==========
+        function setLanguage(lang) {
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Update all elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update active flag button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            // Save preference
+            localStorage.setItem('immosbro_lang', lang);
+        }
+
+        // Event listeners for flags
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
+
+        // Load saved language or default to French
+        const savedLang = localStorage.getItem('immosbro_lang') || 'fr';
+        setLanguage(savedLang);
+
+        // ========== MENU ==========
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
