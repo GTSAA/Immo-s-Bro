@@ -1,1 +1,14 @@
-
+[
+  {
+    "id": "IMB-2026-001",
+    "titre": "Magnifique appartement avec vue",
+    "type": "Appartement",
+    "ville": "Sion",
+    "prix": "CHF 750'000",
+    "surface": "110 m²",
+    "pieces": "4.5 pièces",
+    "statut": "Disponible",
+    "image": "images/biens/bien-001/photo1.jpg",
+    "description": "Appartement lumineux avec une belle situation."
+  }
+]
