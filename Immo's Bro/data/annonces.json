@@ -11,6 +11,8 @@
     "image": "images/biens/bien-001/Vétroz.jpeg",
     "description": "Appartement traversant lumineux avec une belle situation."
   },
+
+  ]
   {
     "id": "IMB-2026-002",
     "titre": "Villa contemporaine avec vue Alpes",
@@ -27,7 +29,7 @@
     "id": "IMB-2026-003",
     "titre": "Chalet familial proche des pistes",
     "type": "Chalet",
-    "ville": "Crans-Montana",
+    "ville": "Haute-Nendaz",
     "prix": "CHF 2'450'000",
     "surface": "220 m²",
     "pieces": "8 pièces",
