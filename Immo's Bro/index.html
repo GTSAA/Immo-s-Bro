@@ -311,7 +311,7 @@
 
     <!-- Process -->
     <section id="process" class="bg-light">
-        <h2 class="section-title" data-i18n="process_title">Comment ça marche ? Simplement.</h2>
+        <h2 class="section-title" data-i18n="process_title">Comment ça marche&nbsp;? Simplement.</h2>
         <ol class="process-list">
             <li class="process-item" data-i18n="process_1">On t’écoute — On comprend ton projet et tes priorités.</li>
             <li class="process-item" data-i18n="process_2">On analyse — Diagnostic, budget, plan d’action.</li>
@@ -348,7 +348,7 @@
 
     <!-- CTA Final -->
     <section style="background: linear-gradient(135deg, var(--primary), #1e3a8a); color: white; text-align: center; padding: 80px 5%;">
-        <h2 class="display-5 mb-4" data-i18n="cta_title">Prêt à avancer avec nous ?</h2>
+        <h2 class="display-5 mb-4" data-i18n="cta_title">Prêt à avancer avec nous&nbsp;?</h2>
         <p class="lead mb-5" data-i18n="cta_text">Un projet ? Une question ? On est là.</p>
         <a href="#contact" class="btn btn-light btn-lg" data-i18n="cta_btn">Prendre un RDV gratuit</a>
     </section>
@@ -373,7 +373,7 @@
                 hero_title: "Parce que dans l’immobilier, tu mérites un grand frère à tes côtés.",
                 hero_subtitle: "Achat, vente, rénovation, location — on t’accompagne de A à Z avec clarté et bienveillance.",
                 hero_cta: "Estimation gratuite",
-                why_title: "Pourquoi Immo's Bro ?",
+                why_title: "Pourquoi Immo's Bro&nbsp;?",
                 why_1_title: "Un accompagnement humain",
                 why_1_text: "On prend le temps de t’écouter, de comprendre ton histoire, ton budget, tes rêves.",
                 why_2_title: "Des conseils objectifs et transparents",
@@ -393,7 +393,7 @@
                 service_5_text: "Simulation hypothécaire personnalisée et conseils fiscaux.",
                 service_6_title: "Gestion locative",
                 service_6_text: "Sélection locataires, baux, entretien et suivi.",
-                process_title: "Comment ça marche ? Simplement.",
+                process_title: "Comment ça marche&nbsp;? Simplement.",
                 process_1: "On t’écoute — On comprend ton projet et tes priorités.",
                 process_2: "On analyse — Diagnostic, budget, plan d’action.",
                 process_3: "On cherche — Biens publics et off-market.",
@@ -405,7 +405,7 @@
                 about_3: "Notre mission est de rendre l'immobilier simple, transparent et humain.",
                 contact_title: "Contacte-nous sans tarder",
                 contact_response: "Réponse garantie sous 48h",
-                cta_title: "Prêt à avancer avec nous ?",
+                cta_title: "Prêt à avancer avec nous&nbsp;?",
                 cta_text: "Un projet ? Une question ? On est là.",
                 cta_btn: "Prendre un RDV gratuit",
                 footer_copy: "© 2026 Immo's Bro by Swiss Administration & Accounting SARL – Tous droits réservés.",
@@ -464,7 +464,7 @@
                 nav_services: "Dienstleistungen",
                 nav_process: "Ablauf",
                 nav_about: "Über uns",
-                hero_title: "Weil du beim Immobilienkauf einen grossen Bruder an deiner Seite verdienst.",
+                hero_title: "Weil du im Immobilienbereich einen grossen Bruder an deiner Seite verdienst.",
                 hero_subtitle: "Kauf, Verkauf, Renovation, Vermietung — wir begleiten dich von A bis Z mit Klarheit und Wohlwollen.",
                 hero_cta: "Kostenlose Schätzung",
                 why_title: "Warum Immo's Bro?",
@@ -540,6 +540,14 @@
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
+
+        // Ferme le menu quand on clique sur un lien (meilleure UX mobile)
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
         document.addEventListener('click', function(e) {
             if (!e.target.closest('header')) {
                 document.getElementById('navLinks').classList.remove('active');
