@@ -317,6 +317,18 @@ loading="lazy">
         </div>
     </section>
 
+ <!-- Biens immobiliers -->
+    <section id="biens">
+        <h2 class="section-title">
+            Nos biens disponibles
+        </h2>
+
+<div id="liste-biens" class="row g-4">
+
+    </div>       
+
+    </section>
+
     <!-- Process -->
     <section id="process" class="bg-light">
         <h2 class="section-title" data-i18n="process_title">Comment ça marche&nbsp;? Simplement.</h2>
@@ -562,5 +574,58 @@ loading="lazy">
             }
         });
     </script>
+<script>
+fetch("data/annonces.json")
+.then(response => response.json())
+.then(biens => {
+
+    const liste = document.getElementById("liste-biens");
+
+    biens.forEach(bien => {
+
+        liste.innerHTML += `
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card-work h-100">
+
+                <img src="${bien.image}"
+                class="card-img-top"
+                alt="${bien.titre}"
+                loading="lazy">
+
+                <div class="card-body">
+
+                    <h4>${bien.titre}</h4>
+
+                    <p>
+                    📍 ${bien.ville}<br>
+                    🏠 ${bien.type}<br>
+                    📐 ${bien.surface}<br>
+                    🛏️ ${bien.pieces}
+                    </p>
+
+                    <h5 class="text-primary">
+                    ${bien.prix}
+                    </h5>
+
+                    <p>
+                    ${bien.description}
+                    </p>
+
+                    <span class="badge bg-success">
+                    ${bien.statut}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+});
+</script>
 </body>
 </html>
