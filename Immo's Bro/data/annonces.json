@@ -9,7 +9,7 @@
     "pieces": "5.5 pièces",
     "statut": "Disponible",
     "image": "images/biens/bien-001/Vétroz.jpeg",
-    "description": "Appartement traversant lumineux avec une belle situation."
+    "description": "Appartement traversant lumineux avec une belle situation. Dossier complet sur demande."
   },
 
  {
@@ -22,7 +22,7 @@
     "pieces": "6 pièces",
     "statut": "Disponible",
     "image": "images/cuisine.jpg",
-    "description": "Magnifique villa avec finitions de haute qualité et vue dégagée."
+    "description": "Magnifique villa avec finitions de haute qualité et vue dégagée. Dossier complet sur demande."
   },
 
   
@@ -36,6 +36,6 @@
     "pieces": "8 pièces",
     "statut": "Disponible",
     "image": "images/chalet.jpg",
-    "description": "Superbe chalet rénové avec vue panoramique sur les Alpes."
+    "description": "Superbe chalet rénové avec vue panoramique sur les Alpes. Dossier complet sur demande."
   }
 ]
