@@ -10,5 +10,29 @@
     "statut": "Disponible",
     "image": "images/biens/bien-001/photo1.jpg",
     "description": "Appartement lumineux avec une belle situation."
+  },
+  {
+    "id": "IMB-2026-002",
+    "titre": "Villa contemporaine avec vue Alpes",
+    "type": "Villa",
+    "ville": "Vétroz",
+    "prix": "CHF 1'250'000",
+    "surface": "180 m²",
+    "pieces": "6 pièces",
+    "statut": "Disponible",
+    "image": "images/achat-villa-moderne.jpg",
+    "description": "Magnifique villa avec vue dégagée et prestations de qualité."
+  },
+  {
+    "id": "IMB-2026-003",
+    "titre": "Chalet familial proche des pistes",
+    "type": "Chalet",
+    "ville": "Crans-Montana",
+    "prix": "CHF 2'450'000",
+    "surface": "220 m²",
+    "pieces": "8 pièces",
+    "statut": "Disponible",
+    "image": "images/chalet-valais.jpg",
+    "description": "Superbe chalet rénové avec vue panoramique sur les Alpes."
   }
 ]
