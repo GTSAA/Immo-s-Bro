@@ -12,9 +12,18 @@
     "description": "Appartement traversant lumineux avec une belle situation."
   },
 
-
-
-
+ {
+    "id": "IMB-2026-002",
+    "titre": "Villa contemporaine avec vue Alpes",
+    "type": "Villa",
+    "ville": "Vétroz",
+    "prix": "CHF 1'250'000",
+    "surface": "180 m²",
+    "pieces": "6 pièces",
+    "statut": "Disponible",
+    "image": "images/achat-villa-moderne.jpg",
+    "description": "Magnifique villa avec vue dégagée et prestations de qualité."
+  },
 
 
 
