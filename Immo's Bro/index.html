@@ -815,7 +815,7 @@ fetch("data/annonces.json")
 
         <div class="card-work h-100">
 
-            <img src="${bien.image}"
+            <img src="${Array.isArray(bien.image) ? bien.image[0] : bien.image}"
             class="card-img-top"
             alt="${bien.titre}"
             loading="lazy">
