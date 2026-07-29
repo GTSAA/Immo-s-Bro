@@ -815,10 +815,13 @@ fetch("data/annonces.json")
 
         <div class="card-work h-100">
 
-            <img src="${Array.isArray(bien.image) ? bien.image[0] : bien.image}"
-            class="card-img-top"
-            alt="${bien.titre}"
-            loading="lazy">
+           <img
+    src="${Array.isArray(bien.image) ? bien.image[0] : bien.image}"
+    class="card-img-top"
+    alt="${bien.titre}"
+    loading="lazy"
+    style="cursor:pointer"
+    onclick='ouvrirGalerie(${JSON.stringify(bien.image)})'>
 
             <div class="card-body">
 
@@ -850,6 +853,29 @@ fetch("data/annonces.json")
     `).join("");
 
 });
+
+function ouvrirGalerie(images){
+
+    if(!Array.isArray(images)){
+        images=[images];
+    }
+
+    const conteneur=document.getElementById("carouselImages");
+
+    conteneur.innerHTML=images.map((img,index)=>`
+        <div class="carousel-item ${index===0 ? "active" : ""}">
+            <img src="${img}"
+                 class="d-block w-100"
+                 style="max-height:80vh;object-fit:contain;">
+        </div>
+    `).join("");
+
+    const modal=new bootstrap.Modal(document.getElementById("galerieModal"));
+
+    modal.show();
+
+}
+
 
 </script>
 <!-- MODALE MENTIONS LEGALES -->
@@ -1138,6 +1164,52 @@ fetch("data/annonces.json")
 </div>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<div class="modal fade" id="galerieModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark border-0">
+
+            <div class="modal-header border-0">
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body p-0">
+
+                <div id="carouselGalerie" class="carousel slide">
+
+                    <div class="carousel-inner" id="carouselImages">
+                    </div>
+
+                    <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselGalerie"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+
+                    <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselGalerie"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
 
 </body>
 </html>
